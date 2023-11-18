@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16
+    volumes:
+      - postgres_db_data:/var/lib/postgresql/data
+    ports:
+      - "8892:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: jaw123
+      POSTGRES_DB: curso
+    logging:
+      options:
+        max-size: "10m"
+    command: ["postgres", "-c", "log_statement=all"]
+volumes:
+  postgres_db_data:

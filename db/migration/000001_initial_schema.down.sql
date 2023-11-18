@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS "posts";
+DROP TABLE IF EXISTS "entries";
+DROP TABLE IF EXISTS "accounts";
+
