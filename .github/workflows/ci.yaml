@@ -15,7 +15,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: jaw123
           POSTGRES_DB: curso
-          POSTGRES_PORT: 8892
+        ports:
+          - 8892:5432
         options: >-
           --health-cmd pg_isready -p 8892
           --health-interval 10s
