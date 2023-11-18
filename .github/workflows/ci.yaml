@@ -7,7 +7,21 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: jaw123
+          POSTGRES_DB: curso
+          POSTGRES_PORT: 8892
+        options: >-
+          --health-cmd pg_isready -p 8892
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,6 +30,9 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '^1.21'
+
+      - name: Migrate DB
+        run: make migrate_up
 
       - name: Test
         run: make test
